@@ -1,0 +1,104 @@
+{
+  "name":"PodA",
+  "url":  "https://www.google.com",
+  "children": [
+    {
+      "name": "Gen",
+      "url":  "https://www.foo.com",
+      "out": "value of out slot",
+      "children": [
+        {
+          "name": "test1",
+          "url":  "https://www.bar.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test2",
+          "url":  "https://www.foo.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test3",
+          "url":  "https://www.fooBar.com",
+          "out": "value of out slot"
+        }
+      ]
+    },
+    {
+      "name": "SWGR",
+      "url":  "https://www.bar.com",
+      "children":[
+        {
+        "name": "test1",
+          "url":  "https://www.foo.com",
+          "color":"red",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test2",
+          "url":  "https://www.fooBar.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test3",
+          "url":  "https://www.evolve.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test4",
+          "url":  "https://www.testMe.com",
+          "out": "value of out slot"
+        }]
+    },
+    {
+      "name": "UPS",
+      "url":  "https://www.fooBar.com",
+      "children":[
+        {
+        "name": "test1",
+          "url":  "https://www.bar.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test2",
+          "url":  "https://www.foo.com",
+          "out": "value of out slot"
+        },
+        {
+          "name": "test3",
+          "url": "https://www.foo.com",
+          "children": [
+            {
+              "name": "test1",
+              "url": "https://www.foo.com"
+            },
+            {
+              "name": "test2",
+              "url": "https://www.foo.com"
+            },
+            {
+              "name": "test3",
+              "url": "https://www.foo.com"
+            }
+          ]
+        },
+        {
+          "name": "test4",
+          "url":  "https://www.foo.com"
+        },
+        {
+          "name": "test5",
+          "url":  "https://www.foo.com"
+        },
+        {
+          "name": "test6",
+          "url":  "https://www.foo.com"
+        },
+        {
+          "name": "test7",
+          "url":  "https://www.foo.com"
+        }
+      ]
+    }
+  ]
+}

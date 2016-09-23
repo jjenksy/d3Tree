@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PowerOneLine</title>
+</head>
+<style> /* set the CSS */
+body{
+    background-color: lightgray;
+}
+/*style for my tooltip*/
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+
+
+</style>
+<body>
+<div class="powerOneLine"></div>
+<!-- using the requireJS module loader to handle all my imports -->
+<script data-main="common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
+<script>
+    // insures all modules are loaded before my page home is called
+    require(['common'], function () {
+        // require d3Tree as my module whatever your main file is for your html page is what you require
+        require(['d3Tree']);
+    })
+</script>
+</body>
+</html>
