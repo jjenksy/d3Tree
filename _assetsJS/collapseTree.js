@@ -2,7 +2,34 @@
  * Created by jjenkins on 9/23/2016.
  */
 
-define(['d3','jquery'],function (d3,$) {
+define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
+
+    //high as I can get the variable without it being global
+
+
+    //set and reset my array
+ var config = function() {
+     var dataToCompareArray = [];
+
+     function dataPusher(dataToArray){
+     if(dataToArray!= undefined) {
+         dataToCompareArray.push(dataToArray);
+     }
+         return dataToCompareArray;
+     }
+
+     function dataReset() {
+         dataToCompareArray = [];
+     }
+
+     return {
+         dataPusher: dataPusher,
+         dataReset: dataReset
+     }
+
+ };
+
+ var configuration = config();
 
 
     var treeData = [
@@ -14,7 +41,12 @@ define(['d3','jquery'],function (d3,$) {
                 {
                     "name": "Level 2: A",
                     "parent": "Top Level",
-                    "link":"www.d3js.com",
+                    "Dashboard":"www.d3js.com",
+                    "cfg1":"foobar.com",
+                    "cfg2":"foobar.com",
+                    "cfg3":"foobar.com",
+                    "docs":"foobar.com",
+                    "UserManuals":"foobar.com",
                     "children": [
                         {
                             "name": "Son of A",
@@ -149,7 +181,7 @@ define(['d3','jquery'],function (d3,$) {
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html(d.name+ " " + d.url + " " + "Out Value " +fakeData()) //playing around with passing data
+                div.html(d.name+ " " + d.url + " " + "Out Value ") //playing around with passing data
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
             })
@@ -159,19 +191,126 @@ define(['d3','jquery'],function (d3,$) {
                     .style("opacity", 0);
             }).on("contextmenu",  click)
             .on("click",function (d) {//onlcick function that activates the hyperlink
-                console.log(d.link);//todo add linking when pulled into main program
+                d3.event.stopPropagation();
+                comparisonModal(d);
+
             });//capture left click then call the click function
 
-        //fake function to proof the passing of data to the tooltip
-        function fakeData(){
-            var data= setInterval(function () {
-                return Math.random * 10;
-            },1000);
-            return data;
+
+
+        /**
+         * Builds the comparison modal
+         * @param datas the data that is to be queried and compared\
+         * todo fix button links to other places
+         */
+        function comparisonModal(datas){
+            //if the compare button is click added unbind to insure only clicks once
+            $('#myModalTitle').text(datas.name);
+            //allows for appending the links to the modal use a for loop
+            //sort the json data on the modal
+            if(datas.Dashboard!=undefined){
+                //get the link to the dashboard and the name from the key
+
+                $('#myModalBody').append("<button type='button' href='"+datas.Dashboard+"' class='btn btn-default'>"+Object.keys(datas)[2]+"</button>");
+            }
+            if(datas.cfg1!=undefined){
+                            //get the link to the dashboard and the name from the key
+                            $('#myModalBody').append("<button type='button' href='"+datas.cfg1+"' class='btn btn-default'>"+Object.keys(datas)[3]+"</button>");
+                        }
+            if(datas.cfg2!=undefined){
+                            //get the link to the dashboard and the name from the key
+                            $('#myModalBody').append("<p><a href='"+datas.cfg2+"'>"+Object.keys(datas)[4]+"</a></p>");
+                        }
+            if(datas.cfg3!=undefined){
+                            //get the link to the dashboard and the name from the key
+                            $('#myModalBody').append("<p><a href='"+datas.cfg3+"'>"+Object.keys(datas)[5]+"</a></p>");
+                        }
+            if(datas.docs!=undefined){
+                            //get the link to the dashboard and the name from the key
+                            $('#myModalBody').append("<p><a href='"+datas.docs+"'>"+Object.keys(datas)[6]+"</a></p>");
+                        }
+            if(datas.UserManuals!=undefined){
+                            //get the link to the dashboard and the name from the key
+                            $('#myModalBody').append("<p><a href='"+datas.UserManuals+"'>"+Object.keys(datas)[7]+"</a></p>");
+                        }
+
+
+
+
+            //show the modal that we can link from and add data to
+            $('#myModal').modal('show');
+
+
+            $('#addToCompare').off().click(function (e) {
+                //remove the hidden class
+                e.preventDefault();
+                e.stopPropagation();
+                if($("#compareBox" ).hasClass( "hidden" )){
+                    $("#compareBox").removeClass("hidden");
+                }
+
+                //if not in the array add it to the array
+                if(!(configuration.dataPusher().includes(datas))){
+                    configuration.dataPusher(datas);
+                    $("#dataToCompare").append("<span class='label label-success'>"+datas.name+"</span>");
+                }
+
+                //if button to compare data is clicked hide the modal and reset the modal body
+                $('#myModal').modal('hide');
+            });
+
+            //event listeners for modal
+            //if the reset compare button is clicked
+            /**
+             * Resets the array and the dom elements
+             */
+            $('#resetToCompare').off().click(function (e) {
+                e.stopPropagation();
+                e.preventDefault();
+                $("#dataToCompare").html("");
+                $("#compareBox").addClass("hidden");
+                configuration.dataReset();
+
+
+
+            });
+
+            /**
+             * Event listener for running the comparison on the dom elem and data
+             */
+            $('#runComparison').off().click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+
+                //set the title text
+                $('#tableModalTitle').text("Test Table");
+                //append the dom for the header row of title data
+                $('#tableModal_tableHead').append("<tr> <th>#</th></tr>");
+                //append the dom with the body of the table row of body data
+                $('#tableModal_tableBody').append("<tr><th scope='row'>1</th></tr>");
+                var data = configuration.dataPusher();
+                $('#tableModal').modal('show');
+                console.log(data);
+            });
+
+
+
+            $("#myModal").on('hidden.bs.modal', function () {
+                $('#myModalBody').html("");
+            });
+
+            $("#tableModal").on('hidden.bs.modal', function () {
+                $('#tableModal_tableBody').html("");
+                $('#tableModal_tableHead').html("");
+            });
         }
+
+
         nodeEnter.append("circle")
             .attr("r", 1e-6)
             .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
 
         nodeEnter.append("text")
             .attr("x", function(d) { return d.children || d._children ? -13 : 13; })
@@ -206,11 +345,29 @@ define(['d3','jquery'],function (d3,$) {
 
         // Update the links…
         var link = svg.selectAll("path.link")
-            .data(links, function(d) { return d.target.id; });
+            .data(links, function(d) {
+                return d.target.id;
+            });
 
+        //select everything with the class of link
+        var colorNum = 0;
         // Enter any new links at the parent's previous position.
         link.enter().insert("path", "g")
             .attr("class", "link")
+            .attr("fill", "none") // sets the fill to none
+            .attr("stroke", function (l) {
+                colorNum++;
+                if(colorNum<=2){
+                    return "green";
+                }
+                if(colorNum<=8 && colorNum>2){
+                    return "yellow";
+                }
+                if(colorNum>8){
+                    return "red";
+                }
+
+            })
             .attr("d", function(d) {
                 var o = {x: source.x0, y: source.y0};
                 return diagonal({source: o, target: o});
@@ -250,6 +407,10 @@ define(['d3','jquery'],function (d3,$) {
         }
         update(d);
     }
+
+
+
+
 
 
 });
