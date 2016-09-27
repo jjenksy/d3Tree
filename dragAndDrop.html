@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .droptarget {
+            float: left;
+            width: 100px;
+            height: 35px;
+            margin: 15px;
+            padding: 10px;
+            border: 1px solid #aaaaaa;
+        }
+    </style>
+</head>
+<body>
+<script data-main="common.js" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
+<script>
+
+
+    // insures all modules are loaded before my page home is called
+    require(['common'], function () {
+        // require d3Tree as my module whatever your main file is for your html page is what you require
+        require(['dragAndDrop']);
+    })
+</script>
+
+
+
+
+<div class="droptarget">
+    <svg id="dragtarget"  draggable="true" viewBox="0 0 200 200" version="1.1"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="100"/>
+    </svg>
+</div>
+
+<div class="droptarget"></div>
+
+
+<p id="demo"></p>
+</body>
+</html>

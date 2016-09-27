@@ -36,7 +36,12 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
         {
             "name": "Top Level",
             "parent": "null",
-            "link":"www.google.com",
+            "Dashboard":"www.d3js.com",
+            "cfg1":"foobar.com",
+            "cfg2":"foobar.com",
+            "cfg3":"foobar.com",
+            "docs":"foobar.com",
+            "UserManuals":"foobar.com",
             "children": [
                 {
                     "name": "Level 2: A",
@@ -51,15 +56,32 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
                         {
                             "name": "Son of A",
                             "parent": "Level 2: A",
-                            "link":"www.d3js.com",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com",
                             "children": [
                                 {
                                     "name": "Grandchild of A",
                                     "parent": "Level 3: A",
+                                    "Dashboard":"www.d3js.com",
+                                    "cfg1":"foobar.com",
+                                    "cfg2":"foobar.com",
+                                    "cfg3":"foobar.com",
+                                    "docs":"foobar.com",
+                                    "UserManuals":"foobar.com",
                                     "children": [
                                         {
                                             "name": "Great Grandchild of A",
-                                            "parent": "Level 4: A"
+                                            "parent": "Level 4: A",
+                                            "Dashboard":"www.d3js.com",
+                                            "cfg1":"foobar.com",
+                                            "cfg2":"foobar.com",
+                                            "cfg3":"foobar.com",
+                                            "docs":"foobar.com",
+                                            "UserManuals":"foobar.com"
                                         }
                                     ]
                                 }
@@ -67,21 +89,45 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
                         },
                         {
                             "name": "Daughter of A",
-                            "parent": "Level 2: A"
+                            "parent": "Level 2: A",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com"
                         }
                     ]
                 },
                 {
                     "name": "Level 2: B",
                     "parent": "Top Level",
+                    "Dashboard":"www.d3js.com",
+                    "cfg1":"foobar.com",
+                    "cfg2":"foobar.com",
+                    "cfg3":"foobar.com",
+                    "docs":"foobar.com",
+                    "UserManuals":"foobar.com",
                     "children": [
                         {
                             "name": "Son of B",
-                            "parent": "Level 2: B"
+                            "parent": "Level 2: B",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com"
                         },
                         {
                             "name": "Daughter of B",
-                            "parent": "Level 2: B"
+                            "parent": "Level 2: B",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com"
                         }
                     ]
 
@@ -89,14 +135,32 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
                 {
                     "name": "Level 2: C",
                     "parent": "Top Level",
+                    "Dashboard":"www.d3js.com",
+                    "cfg1":"foobar.com",
+                    "cfg2":"foobar.com",
+                    "cfg3":"foobar.com",
+                    "docs":"foobar.com",
+                    "UserManuals":"foobar.com",
                     "children": [
                         {
                             "name": "Son of C",
-                            "parent": "Level 2: C"
+                            "parent": "Level 2: C",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com"
                         },
                         {
                             "name": "Daughter of C",
-                            "parent": "Level 2: C"
+                            "parent": "Level 2: C",
+                            "Dashboard":"www.d3js.com",
+                            "cfg1":"foobar.com",
+                            "cfg2":"foobar.com",
+                            "cfg3":"foobar.com",
+                            "docs":"foobar.com",
+                            "UserManuals":"foobar.com"
                         }
                     ]
 
@@ -198,118 +262,20 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
 
 
 
-        /**
-         * Builds the comparison modal
-         * @param datas the data that is to be queried and compared\
-         * todo fix button links to other places
-         */
-        function comparisonModal(datas){
-            //if the compare button is click added unbind to insure only clicks once
-            $('#myModalTitle').text(datas.name);
-            //allows for appending the links to the modal use a for loop
-            //sort the json data on the modal
-            if(datas.Dashboard!=undefined){
-                //get the link to the dashboard and the name from the key
-
-                $('#myModalBody').append("<button type='button' href='"+datas.Dashboard+"' class='btn btn-default'>"+Object.keys(datas)[2]+"</button>");
-            }
-            if(datas.cfg1!=undefined){
-                            //get the link to the dashboard and the name from the key
-                            $('#myModalBody').append("<button type='button' href='"+datas.cfg1+"' class='btn btn-default'>"+Object.keys(datas)[3]+"</button>");
-                        }
-            if(datas.cfg2!=undefined){
-                            //get the link to the dashboard and the name from the key
-                            $('#myModalBody').append("<p><a href='"+datas.cfg2+"'>"+Object.keys(datas)[4]+"</a></p>");
-                        }
-            if(datas.cfg3!=undefined){
-                            //get the link to the dashboard and the name from the key
-                            $('#myModalBody').append("<p><a href='"+datas.cfg3+"'>"+Object.keys(datas)[5]+"</a></p>");
-                        }
-            if(datas.docs!=undefined){
-                            //get the link to the dashboard and the name from the key
-                            $('#myModalBody').append("<p><a href='"+datas.docs+"'>"+Object.keys(datas)[6]+"</a></p>");
-                        }
-            if(datas.UserManuals!=undefined){
-                            //get the link to the dashboard and the name from the key
-                            $('#myModalBody').append("<p><a href='"+datas.UserManuals+"'>"+Object.keys(datas)[7]+"</a></p>");
-                        }
-
-
-
-
-            //show the modal that we can link from and add data to
-            $('#myModal').modal('show');
-
-
-            $('#addToCompare').off().click(function (e) {
-                //remove the hidden class
-                e.preventDefault();
-                e.stopPropagation();
-                if($("#compareBox" ).hasClass( "hidden" )){
-                    $("#compareBox").removeClass("hidden");
-                }
-
-                //if not in the array add it to the array
-                if(!(configuration.dataPusher().includes(datas))){
-                    configuration.dataPusher(datas);
-                    $("#dataToCompare").append("<span class='label label-success'>"+datas.name+"</span>");
-                }
-
-                //if button to compare data is clicked hide the modal and reset the modal body
-                $('#myModal').modal('hide');
-            });
-
-            //event listeners for modal
-            //if the reset compare button is clicked
-            /**
-             * Resets the array and the dom elements
-             */
-            $('#resetToCompare').off().click(function (e) {
-                e.stopPropagation();
-                e.preventDefault();
-                $("#dataToCompare").html("");
-                $("#compareBox").addClass("hidden");
-                configuration.dataReset();
-
-
-
-            });
-
-            /**
-             * Event listener for running the comparison on the dom elem and data
-             */
-            $('#runComparison').off().click(function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-
-                //set the title text
-                $('#tableModalTitle').text("Test Table");
-                //append the dom for the header row of title data
-                $('#tableModal_tableHead').append("<tr> <th>#</th></tr>");
-                //append the dom with the body of the table row of body data
-                $('#tableModal_tableBody').append("<tr><th scope='row'>1</th></tr>");
-                var data = configuration.dataPusher();
-                $('#tableModal').modal('show');
-                console.log(data);
-            });
-
-
-
-            $("#myModal").on('hidden.bs.modal', function () {
-                $('#myModalBody').html("");
-            });
-
-            $("#tableModal").on('hidden.bs.modal', function () {
-                $('#tableModal_tableBody').html("");
-                $('#tableModal_tableHead').html("");
-            });
-        }
-
 
         nodeEnter.append("circle")
             .attr("r", 1e-6)
             .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+        //for custom nodes try this
+        // nodeEnter.append("path")
+        //     .style("stroke", "black")
+        //     .style("fill", "white")
+        //     .attr("d", d3.svg.symbol()
+        //         .size(200)
+        //         .type(function(d) { if
+        //         (d.value >= 9) { return "cross"; } else if
+        //         (d.value <= 9) { return "diamond";}
+        //         }));
 
 
         nodeEnter.append("text")
@@ -394,6 +360,10 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
         });
     }
 
+    /**
+     * function that handles my right click resize the data
+     * @param d
+     */
     // Toggle children on click.
     function click(d) {
         //prevent the default left click window
@@ -406,6 +376,114 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
             d._children = null;
         }
         update(d);
+    }
+
+    /**
+     * Builds the comparison modal
+     * @param datas the data that is to be queried and compared\
+     * todo fix button links to other places
+     */
+    function comparisonModal(datas){
+        //if the compare button is click added unbind to insure only clicks once
+        $('#myModalTitle').text(datas.name);
+        //allows for appending the links to the modal use a for loop
+        //sort the json data on the modal
+        if(datas.Dashboard!=undefined){
+            //get the link to the dashboard and the name from the key
+
+            $('#myModalBody').append("<button type='button' href='"+datas.Dashboard+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-dashboard pull-right'></i>"+Object.keys(datas)[2]+"</button>");
+        }
+        if(datas.cfg1!=undefined){
+            //get the link to the dashboard and the name from the key
+            $('#myModalBody').append("<button type='button' href='"+datas.cfg1+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-cog pull-right'></i> "+Object.keys(datas)[3]+"</button>");
+        }
+        if(datas.cfg2!=undefined){
+            //get the link to the dashboard and the name from the key
+            $('#myModalBody').append("<button type='button' href='"+datas.cfg2+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-send pull-right'></i> "+Object.keys(datas)[4]+"</button>");
+        }
+        if(datas.cfg3!=undefined){
+            //get the link to the dashboard and the name from the key
+            $('#myModalBody').append("<button type='button' href='"+datas.cfg3+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-stats pull-right'></i> "+Object.keys(datas)[5]+"</button>");
+        }
+        if(datas.docs!=undefined){
+            //get the link to the dashboard and the name from the key
+            $('#myModalBody').append("<button type='button' href='"+datas.docs+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-paperclip pull-right'></i> "+Object.keys(datas)[6]+"</button>");
+        }
+        if(datas.UserManuals!=undefined){
+            //get the link to the dashboard and the name from the key
+            $('#myModalBody').append("<button type='button' href='"+datas.UserManuals+"' class='btn btn-custom btnNav'><i class='glyphicon glyphicon-open-file pull-right'></i> "+Object.keys(datas)[7]+"</button>");
+        }
+
+
+
+
+        //show the modal that we can link from and add data to
+        $('#myModal').modal('show');
+
+
+        $('#addToCompare').off().click(function (e) {
+            //remove the hidden class
+            e.preventDefault();
+            e.stopPropagation();
+            if($("#compareBox" ).hasClass( "hidden" )){
+                $("#compareBox").removeClass("hidden");
+            }
+
+            //if not in the array add it to the array
+            if(!(configuration.dataPusher().includes(datas))){
+                configuration.dataPusher(datas);
+                $("#dataToCompare").append("<span class='label label-success'>"+datas.name+"</span>");
+            }
+
+            //if button to compare data is clicked hide the modal and reset the modal body
+            $('#myModal').modal('hide');
+        });
+
+        //event listeners for modal
+        //if the reset compare button is clicked
+        /**
+         * Resets the array and the dom elements
+         */
+        $('#resetToCompare').off().click(function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            $("#dataToCompare").html("");
+            $("#compareBox").addClass("hidden");
+            configuration.dataReset();
+
+
+
+        });
+
+        /**
+         * Event listener for running the comparison on the dom elem and data
+         */
+        $('#runComparison').off().click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+
+            //set the title text
+            $('#tableModalTitle').text("Test Table");
+            //append the dom for the header row of title data
+            $('#tableModal_tableHead').append("<tr> <th>#</th></tr>");
+            //append the dom with the body of the table row of body data
+            $('#tableModal_tableBody').append("<tr><th scope='row'>1</th></tr>");
+            var data = configuration.dataPusher();
+            $('#tableModal').modal('show');
+            console.log(data);
+        });
+
+
+
+        $("#myModal").on('hidden.bs.modal', function () {
+            $('#myModalBody').html("");
+        });
+
+        $("#tableModal").on('hidden.bs.modal', function () {
+            $('#tableModal_tableBody').html("");
+            $('#tableModal_tableHead').html("");
+        });
     }
 
 
