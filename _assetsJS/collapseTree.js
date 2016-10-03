@@ -5,12 +5,15 @@
 define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
 
     //high as I can get the variable without it being global
-
+    'use strict';
 
     //set and reset my array
+    //this uses closures to protect the array content
  var config = function() {
-     var dataToCompareArray = [];
+     var dataToCompareArray = [],
+         bodyDomArray = [];
 
+     //data to be push or reset into above array
      function dataPusher(dataToArray){
      if(dataToArray!= undefined) {
          dataToCompareArray.push(dataToArray);
@@ -22,14 +25,32 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
          dataToCompareArray = [];
      }
 
+     //data to push for the body comparison dom elems
+     function bodyDomPusher(bodyDomToArray){
+         if(bodyDomToArray!= undefined) {
+             bodyDomArray.push(bodyDomToArray);
+         }
+         return bodyDomArray;
+     }
+
+     function bodyDomReset() {
+         bodyDomArray = [];
+     }
+
+
+
      return {
          dataPusher: dataPusher,
-         dataReset: dataReset
+         dataReset: dataReset,
+         bodyDomPusher: bodyDomPusher,
+         bodyDomReset:bodyDomReset
+
      }
 
  };
-
+//reference to the config object
  var configuration = config();
+
 
 
     var treeData = [
@@ -384,6 +405,8 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
      * todo fix button links to other places
      */
     function comparisonModal(datas){
+
+
         //if the compare button is click added unbind to insure only clicks once
         $('#myModalTitle').text(datas.name);
         //allows for appending the links to the modal use a for loop
@@ -437,6 +460,7 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
 
             //if button to compare data is clicked hide the modal and reset the modal body
             $('#myModal').modal('hide');
+
         });
 
         //event listeners for modal
@@ -457,22 +481,62 @@ define(['d3','jquery','bootstrap'],function (d3,$,bootstrap) {
 
         /**
          * Event listener for running the comparison on the dom elem and data
+         * do the comparison of the arrays here bro
          */
         $('#runComparison').off().click(function (e) {
             e.preventDefault();
             e.stopPropagation();
-
-
             //set the title text
-            $('#tableModalTitle').text("Test Table");
-            //append the dom for the header row of title data
-            $('#tableModal_tableHead').append("<tr> <th>#</th></tr>");
+            $('#tableModalTitle').text("Comparison Table");
+            //append a # sign to left head to show the numbers
+            $('#tableModal_tableHead').append("<tr class='comparisonTableHead'> <th>#</th></tr>");
+            //using spread syntax because of uknown amount of arguments
             //append the dom with the body of the table row of body data
-            $('#tableModal_tableBody').append("<tr><th scope='row'>1</th></tr>");
-            var data = configuration.dataPusher();
-            $('#tableModal').modal('show');
-            console.log(data);
+            var data = configuration.dataPusher(),
+                bodyDom;
+            for (var i = 0; i < data.length; i++) {
+
+                //create the compare data
+                //append the header with the name of data to be compared
+                $('.comparisonTableHead').append("<th>"+data[i].name+"</th>");
+                //itterate to get the data for the point
+                //todo get the reference to the data the will be compared from the json file then subscribe to that data and return a javascript object that holds the multiple arrays of data
+              console.log(data[i].name);
+                //todo create the amount of body tags that will need to fill with data
+                // for (var i = 0; i < data[i].length; i++) {
+                //     //create the table body with unique class names
+                //     bodyDom = 'tbody_row_'+i;
+                //     $('#tableModal_tableBody').append("<tr class='" + bodyDom + "' ><td scope='row'>" + i + "</td></tr>");
+                //     //get an array of my body dom class elems to be used later
+                //     configuration.bodyDomPusher(bodyDom);
+                // }
+
+            }
+            //run the data comparison algorithim
+            compareData(data);
         });
+
+        //todo get the array of point data and compare the data to populate the dom with
+        function compareData(dataToCompare){
+
+
+            var bodyDomElem =  configuration.bodyDomPusher();
+
+            //data to iterate over
+            // for (var i = 0; i < array1.length; i++) {
+            //     for (var j = 0; j < array2.length; j++) {
+            //         if (array1[i] == array2[j]) {
+            //             $('.'+bodyDom+i).append("<td>"+array1[i]+"</td>");
+            //         }
+            //     }
+            // }
+
+
+            //show the modal
+            $('#tableModal').modal('show');
+            //reset the comparison list
+            $('#resetToCompare').click();
+        }
 
 
 
